@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 import AppContainer from "./presenter";
 
 const mapStateToProps = (state, ownProps) => {
-   const { user } = state;
+   const { auth } = state;
    return {
-      isLoggedIn: user.isLoggedIn,
-      profile: user.profile
+      isLoggedIn: auth.isLoggedIn,
+      profile: auth.profile
    };
 };
 

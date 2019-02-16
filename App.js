@@ -1,15 +1,17 @@
 import React from "react";
 import { AppLoading, Asset, Font } from "expo";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import configureStore from "./redux/store";
+import AppContainer from "./components/AppContainer";
 
 class App extends React.Component {
    state = {
       loading: true
    };
+
    render() {
       const { persistor, store } = configureStore();
 
@@ -25,9 +27,7 @@ class App extends React.Component {
       return (
          <Provider store={store}>
             <PersistGate persistor={persistor}>
-               <View style={styles.container}>
-                  <Text>Open up App.js to start working on your app!</Text>
-               </View>
+               <AppContainer />
             </PersistGate>
          </Provider>
       );
@@ -55,14 +55,5 @@ class App extends React.Component {
       console.log(error);
    };
 }
-
-const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center"
-   }
-});
 
 export default App;
