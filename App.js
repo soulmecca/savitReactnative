@@ -1,14 +1,18 @@
 import React from "react";
 import { AppLoading, Asset, Font } from "expo";
-import { Iconicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import configureStore from "./redux/store";
 
 class App extends React.Component {
    state = {
       loading: true
    };
    render() {
+      const { persistor, store } = configureStore();
+
       if (this.state.loading) {
          return (
             <AppLoading
@@ -19,21 +23,25 @@ class App extends React.Component {
          );
       }
       return (
-         <View style={styles.container}>
-            <Text>Open up App.js to start working on your app!</Text>
-         </View>
+         <Provider store={store}>
+            <PersistGate persistor={persistor}>
+               <View style={styles.container}>
+                  <Text>Open up App.js to start working on your app!</Text>
+               </View>
+            </PersistGate>
+         </Provider>
       );
    }
 
    loadAsssetsAsync = async () => {
       return Promise.all([
-         Assets.loadAsync([
+         Asset.loadAsync([
             require("./assets/images/logo.png"),
             require("./assets/images/logo-white.png"),
             require("./assets/images/profile.jpg"),
             require("./assets/images/photoPlaceholder.png")
          ]),
-         Font.loadAsync([...Ionicons.font, ...MaterialIcons.font])
+         Font.loadAsync({ ...Ionicons.font, ...MaterialIcons.font })
       ]);
    };
 
