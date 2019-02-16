@@ -36,14 +36,21 @@ class LoginContainer extends Component {
       });
    };
 
-   onSubmit = () => {
+   onSubmit = async () => {
       const { username, password } = this.state;
       if (!this.isSubmitting) {
          if (username && password) {
             this.setState({
                isSubmitting: true
             });
-            this.props.usernameLogin(username, password);
+            const result = await this.props.usernameLogin(username, password);
+
+            if (!result) {
+               Alert.alert("Something went wrong, try agina");
+               this.setState({
+                  isSubmitting: false
+               });
+            }
          } else {
             Alert.alert("All fields are requesd");
          }

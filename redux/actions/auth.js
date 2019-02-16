@@ -16,17 +16,17 @@ export const usernameLogin = (username, password) => async dispatch => {
          data: { token, user }
       } = response;
 
-      if (token) {
+      if (token && user) {
          dispatch({
             type: LOG_IN,
             payload: token
          });
-      }
-      if (user) {
          dispatch(setUser(user));
       }
+      return true;
    } catch (err) {
       console.log("Error: ", err);
+      return false;
    }
 };
 
