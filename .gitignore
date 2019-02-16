@@ -6,4 +6,4 @@ npm-debug.*
 *.key
 *.mobileprovision
 
-constant.js
+constants.js
