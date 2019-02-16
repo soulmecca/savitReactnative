@@ -1,4 +1,5 @@
 import { auth } from "../../apis/auth";
+import { Facebook } from "expo";
 import { LOG_IN, LOG_OUT, SET_USER } from "./types";
 
 function setUser(user) {
@@ -30,6 +31,10 @@ export const usernameLogin = (username, password) => async dispatch => {
    }
 };
 
-export const logout = () => async dispatch => {
+export const logout = () => {
    return {};
+};
+
+export const facebookLogin = () => async dispatch => {
+   const response = await Facebook.logInWithReadPermissionsAsync();
 };
