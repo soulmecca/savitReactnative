@@ -9,14 +9,15 @@ import {
    Dimensions,
    TouchableOpacity,
    TextInput,
-   StatusBar
+   StatusBar,
+   ActivityIndicator
 } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
 const LoginScreen = props => (
    <View style={styles.container}>
-      {/* <StatusBar barStyle={"light-content"} /> */}
+      <StatusBar barStyle={"light-content"} />
       <View style={styles.header}>
          <Image
             source={require("../../assets/images/logo-white.png")}
@@ -30,15 +31,27 @@ const LoginScreen = props => (
             style={styles.textInput}
             autoCapitalize={"none"}
             autoCorrect={false}
+            value={props.username}
+            onChangeText={props.changeUsername}
+            returnKeyType={"send"}
+            onSubmitEditing={props.onSubmit}
          />
          <TextInput
             placeholder="Password"
             style={styles.textInput}
             secureTextEntry={true}
+            value={props.password}
+            onChangeText={props.changePassword}
+            returnKeyType={"send"}
+            onSubmitEditing={props.onSubmit}
          />
-         <TouchableOpacity style={styles.touchable}>
+         <TouchableOpacity style={styles.touchable} onPressOut={props.onSubmit}>
             <View style={styles.button}>
-               <Text style={styles.btnText}>Login</Text>
+               {props.isSubmitting ? (
+                  <ActivityIndicator size="small" color="white" />
+               ) : (
+                  <Text style={styles.btnText}>Login</Text>
+               )}
             </View>
          </TouchableOpacity>
          <TouchableOpacity style={styles.fbContainer}>
@@ -54,7 +67,10 @@ const LoginScreen = props => (
 LoginScreen.propTypes = {
    isSubmitting: PropTypes.bool.isRequired,
    username: PropTypes.string.isRequired,
-   password: PropTypes.string.isRequired
+   password: PropTypes.string.isRequired,
+   changePassword: PropTypes.func.isRequired,
+   changeUsername: PropTypes.func.isRequired,
+   onSubmit: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -69,6 +85,7 @@ const styles = StyleSheet.create({
       width: width
    },
    logo: {
+      marginTop: 14,
       width: 180,
       height: 60
    },
@@ -106,7 +123,8 @@ const styles = StyleSheet.create({
    },
    touchable: {
       borderRadius: 5,
-      backgroundColor: "#3E99EE"
+      backgroundColor: "#3E99EE",
+      marginTop: 25
    },
    button: {
       paddingHorizontal: 7,
