@@ -14,7 +14,7 @@ class App extends React.Component {
 
    render() {
       const { persistor, store } = configureStore();
-
+      // store.dispatch({ type: "LOG_OUT" });
       if (this.state.loading) {
          return (
             <AppLoading

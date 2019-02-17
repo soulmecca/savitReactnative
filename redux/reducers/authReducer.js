@@ -35,7 +35,7 @@ function applyLogout(state) {
    };
 }
 
-function applySetUser(action) {
+function applySetUser(state, action) {
    return {
       ...state,
       profile: action.payload

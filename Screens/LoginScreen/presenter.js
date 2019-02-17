@@ -54,7 +54,10 @@ const LoginScreen = props => (
                )}
             </View>
          </TouchableOpacity>
-         <TouchableOpacity style={styles.fbContainer}>
+         <TouchableOpacity
+            style={styles.fbContainer}
+            onPressOut={props.facebookLogin}
+         >
             <View style={styles.fbView}>
                <Ionicons name="logo-facebook" size={22} color="#3E99EE" />
                <Text style={styles.fbText}>Login with Facebook</Text>

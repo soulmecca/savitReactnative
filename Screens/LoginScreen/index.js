@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import LoginContainer from "./container";
-import { usernameLogin } from "../../redux/actions/auth";
+import { usernameLogin, facebookLogin } from "../../redux/actions/auth";
 
 export default connect(
    null,
-   { usernameLogin }
+   { usernameLogin, facebookLogin }
 )(LoginContainer);

@@ -9,7 +9,7 @@ export const auth = axios.create({
 });
 
 export const socialLogin = axios.create({
-   baseURL: "/users/login",
+   baseURL: `${API_URL}/users/login`,
    headers: {
       "Content-type": "application/json"
    }

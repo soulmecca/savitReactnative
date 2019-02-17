@@ -1,10 +1,11 @@
-import { auth } from "../../apis/auth";
+import { auth, socialLogin } from "../../apis/auth";
 import { Facebook } from "expo";
 import { LOG_IN, LOG_OUT, SET_USER } from "./types";
+import { FB_APP_ID } from "../../constants";
 
 function setUser(user) {
    return {
-      type: SET_USERS,
+      type: SET_USER,
       payload: user
    };
 }
@@ -36,5 +37,32 @@ export const logout = () => {
 };
 
 export const facebookLogin = () => async dispatch => {
-   const response = await Facebook.logInWithReadPermissionsAsync();
+   try {
+      const { token, type } = await Facebook.logInWithReadPermissionsAsync(
+         FB_APP_ID,
+         {
+            permissions: ["public_profile", "email"]
+         }
+      );
+
+      if (type === "success") {
+         const res = await socialLogin.post("/facebook/", {
+            access_token: token
+         });
+
+         const fb_token = res.data.token;
+         const user = res.data.user;
+         if (fb_token && user) {
+            dispatch({
+               type: LOG_IN,
+               payload: fb_token
+            });
+            dispatch(setUser(user));
+         }
+         return true;
+      }
+   } catch (err) {
+      console.log(err);
+      return false;
+   }
 };
