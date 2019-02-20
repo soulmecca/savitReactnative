@@ -7,7 +7,7 @@ const NavButton = props => (
    <TouchableWithoutFeedback onPressOut={props.onPress}>
       <View style={styles.container}>
          {props.brand ? (
-            <Feather name={props.iconName} color={"black"} size={30} />
+            <Feather name={props.iconName} color={"black"} size={props.size} />
          ) : (
             <Ionicons name={props.iconName} color={"black"} size={30} />
          )}

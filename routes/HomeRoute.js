@@ -21,6 +21,7 @@ const HomeRoute = createStackNavigator(
                <NavButton
                   iconName={"camera"}
                   brand={"feather"}
+                  size={24}
                   onPress={() => navigation.navigate("TakePhoto")}
                />
             )

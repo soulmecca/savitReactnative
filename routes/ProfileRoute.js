@@ -5,7 +5,10 @@ import shardRoutes, { sharedOptions } from "./sharedRoutes";
 const ProfileRoute = createStackNavigator(
    {
       Profile: {
-         screen: ProfileScreen
+         screen: ProfileScreen,
+         navigationOptions: ({ screenProps }) => ({
+            headerTitle: screenProps.username
+         })
       },
       ...shardRoutes
    },
