@@ -1,6 +1,11 @@
 import React from "react";
 import { AppLoading, Asset, Font } from "expo";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import {
+   Ionicons,
+   MaterialIcons,
+   Foundation,
+   Feather
+} from "@expo/vector-icons";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -41,7 +46,12 @@ class App extends React.Component {
             require("./assets/images/profile.jpg"),
             require("./assets/images/photoPlaceholder.png")
          ]),
-         Font.loadAsync({ ...Ionicons.font, ...MaterialIcons.font })
+         Font.loadAsync({
+            ...Ionicons.font,
+            ...MaterialIcons.font
+            // ...Foundation.font,
+            // ...Feather.font
+         })
       ]);
    };
 

@@ -32,11 +32,14 @@ const TabsNavigation = createBottomTabNavigator(
       },
       AddPhoto: {
          screen: View,
-         navigationOptions: {
+         navigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ tintColor }) => (
                <Feather name={"plus-square"} size={30} color={tintColor} />
-            )
-         }
+            ),
+            tabBarOnPress: () => {
+               navigation.navigate("TakePhoto");
+            }
+         })
       },
       Notifications: {
          screen: NotificationsRoute,
